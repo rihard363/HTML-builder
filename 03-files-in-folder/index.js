@@ -14,12 +14,7 @@ fs.readdir(wayPath, { withFileTypes: true }, (err, files) => {
     });
     fileArr.forEach((sample) => {
       result =
-        path.parse(sample).name +
-        ' - ' +
-        path.extname(sample).replace('.', '') +
-        ' - ' +
-        fs.statSync(path.join(wayPath, sample)).size / 1000 +
-        'Kb';
+        path.parse(sample).name + ' - ' + path.extname(sample).replace('.', '');
       console.log(result);
     });
   }
