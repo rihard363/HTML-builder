@@ -12,7 +12,7 @@ fs.promises
         fs.promises
           .stat(filePath)
           .then((sample) => {
-            console.log(`${fileName} - ${fileType} - ${sample.size} Kb`);
+            console.log(`${fileName} - ${fileType} - ${sample.size / 1000} Kb`);
           })
           .catch((err) => {
             console.log(err);
