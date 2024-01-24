@@ -1,21 +1,15 @@
 let fs = require('fs'),
-  path = require('path'),
-  fileArr = [],
-  result = '';
+  path = require('path');
 const wayPath = path.join(__dirname, 'secret-folder');
-fs.readdir(wayPath, { withFileTypes: true }, (err, files) => {
-  if (err) {
-    console.log(err);
-  } else {
-    files.forEach((file) => {
-      if (file.isFile()) {
-        fileArr.push(file.name);
-      }
-    });
-    fileArr.forEach((sample) => {
-      result =
-        path.parse(sample).name + ' - ' + path.extname(sample).replace('.', '');
-      console.log(result);
-    });
-  }
+fs.promises.readdir(wayPath, { withFileTypes: true }).then((files) => {
+  files.forEach((file) => {
+    if (file.isFile()) {
+      let filePath = path.join(wayPath, file.name);
+      let fileName = path.parse(filePath).name,
+        fileType = path.extname(filePath).replace('.', '');
+      fs.promises.stat(filePath).then((sample) => {
+        console.log(`${fileName} - ${fileType} - ${sample.size}`);
+      });
+    }
+  });
 });

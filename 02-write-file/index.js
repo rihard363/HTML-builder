@@ -1,4 +1,5 @@
 let fs = require('fs');
+let path = require('path');
 let readline = require('readline');
 let process = require('node:process');
 let rl = readline.createInterface(process.stdin, process.stdout);
@@ -8,11 +9,16 @@ rl.on('line', (text) => {
   if (text === 'exit') {
     close();
   } else {
-    fs.appendFile('text.txt', text, { encoding: 'utf8', flag: 'a' }, (err) => {
-      if (err) {
-        throw err;
-      }
-    });
+    fs.appendFile(
+      path.join(__dirname, 'text.txt'),
+      text,
+      { encoding: 'utf8', flag: 'a' },
+      (err) => {
+        if (err) {
+          throw err;
+        }
+      },
+    );
   }
 });
 rl.on('SIGINT', () => {

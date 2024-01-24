@@ -1,5 +1,6 @@
 let fs = require('fs'),
-  stream = new fs.ReadStream('text.txt', 'utf-8'),
+  path = require('path'),
+  stream = new fs.ReadStream(path.join(__dirname, 'text.txt'), 'utf-8'),
   data = '';
 stream
   .on('data', function (chunk) {
